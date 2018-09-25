@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import Axios from 'axios';
+import NavBtn from './nav-btn';
+import config from '../config';
 
 
 class AddItem extends Component {
@@ -7,19 +10,21 @@ class AddItem extends Component {
         details:''
     }
 
-    handleAddItem(e){
+    async handleAddItem(e){
         e.preventDefault();
-        this.props.add(this.state);
-        this.setState({
-            title: '',
-            details: ''
-        })
+
+        await Axios.post(`${config.API_URL}/todos${config.API_KEY}`, this.state);
+
+        this.props.history.push('/');
     }
 
     render(){
         const {title,details} = this.state;
         return (
-            <form onSubmit={this.handleAddItem.bind(this)}>
+           <div>
+               <h1 className="center">Add To Do Item</h1>
+                <NavBtn to="/" text="Back to List" color = 'green darken-2'/>
+                <form onSubmit={this.handleAddItem.bind(this)}>
                 <div className="row">
                     <div className="col s8 offset-s2">
                     <label>Title</label>
@@ -38,6 +43,7 @@ class AddItem extends Component {
                     </div>
                 </div>
             </form>
+           </div>
         )
     }
 }
