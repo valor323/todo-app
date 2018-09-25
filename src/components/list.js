@@ -57,7 +57,7 @@ class List extends Component {
         });
         return (
                 <div>
-                    <h1 className="center">To do List</h1>
+                    <h1 className="center">To Do List</h1>
                     <NavBtn to="/add-item" color="purple darken-2" text="Add Item"/>
                     <p className="red-text text-darken-2">{error}</p>
                     <ul className = 'collection'>{listElement}</ul>
